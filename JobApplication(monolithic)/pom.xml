@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>com.alam</groupId>
-    <artifactId>JobApplication</artifactId>
+    <artifactId>JobApplicationMonolithic</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>JobApplication</name>
     <description>JobApplication</description>
@@ -52,6 +52,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 

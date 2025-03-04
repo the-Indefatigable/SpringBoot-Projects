@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="94f37c1e-05fc-4474-84ea-a46186d02ff9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/JobMicroservices/src/main/java/com/alam/JobMicroservices/job/Job.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JobMicroservices/src/main/java/com/alam/JobMicroservices/job/JobController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JobMicroservices/src/main/java/com/alam/JobMicroservices/job/JobRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JobMicroservices/src/main/java/com/alam/JobMicroservices/job/JobService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JobMicroservices/src/main/java/com/alam/JobMicroservices/job/impl/JobServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobApplication/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobApplication/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobApplication/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobApplication/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobApplication/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobApplication/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobApplication/src/main/java/com/alam/jobapplication/JobApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobApplication/src/main/java/com/alam/jobapplication/company/Company.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobApplication/src/main/java/com/alam/jobapplication/company/CompanyController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobApplication/src/main/java/com/alam/jobapplication/company/CompanyRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobApplication/src/main/java/com/alam/jobapplication/company/CompanyService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobApplication/src/main/java/com/alam/jobapplication/company/impl/CompanyServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobApplication/src/main/java/com/alam/jobapplication/job/Job.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobApplication/src/main/java/com/alam/jobapplication/job/JobController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobApplication/src/main/java/com/alam/jobapplication/job/JobRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobApplication/src/main/java/com/alam/jobapplication/job/JobService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobApplication/src/main/java/com/alam/jobapplication/job/impl/JobServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobApplication/src/main/java/com/alam/jobapplication/reviews/Review.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobApplication/src/main/java/com/alam/jobapplication/reviews/ReviewController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobApplication/src/main/java/com/alam/jobapplication/reviews/ReviewRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobApplication/src/main/java/com/alam/jobapplication/reviews/ReviewService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobApplication/src/main/java/com/alam/jobapplication/reviews/impl/ReviewServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobApplication/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JobApplication/src/test/java/com/alam/jobapplication/JobApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="2toih0zOxSLSz4DjAIxEHsDNY7s" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/alam/Documents/SpringBootProjects",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.24978.46" />
+        <option value="bundled-js-predefined-d6986cc7102b-76f8388c3a79-JavaScript-IU-243.24978.46" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="94f37c1e-05fc-4474-84ea-a46186d02ff9" name="Changes" comment="" />
+      <created>1741024943502</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1741024943502</updated>
+      <workItem from="1741024944622" duration="2000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
