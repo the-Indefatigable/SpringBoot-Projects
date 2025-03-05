@@ -3,8 +3,18 @@ package com.alam.JobMicroservices.job.impl;
 import com.alam.JobMicroservices.job.Job;
 import com.alam.JobMicroservices.job.JobRepository;
 import com.alam.JobMicroservices.job.JobService;
-import com.alam.JobMicroservices.job.dto.JobWithCompanyDto;
+import com.alam.JobMicroservices.job.clients.CompanyClient;
+import com.alam.JobMicroservices.job.clients.ReviewClient;
+import com.alam.JobMicroservices.job.dto.JobDto;
 import com.alam.JobMicroservices.job.external.Company;
+import com.alam.JobMicroservices.job.external.Review;
+import com.alam.JobMicroservices.job.mapper.JobMapper;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -18,38 +28,53 @@ public class JobServiceImpl implements JobService {
 
 //    private List<Job> jobs = new ArrayList<>();
     JobRepository jobRepository;
-//    long id = 0;
 
-    public JobServiceImpl(JobRepository jobRepository) {
+//    long id = 0;
+//    @Autowired
+//    RestTemplate restTemplate;
+//    @Autowired
+    private final CompanyClient companyClient;
+//    @Autowired
+    private final ReviewClient reviewClient;
+
+    public JobServiceImpl(JobRepository jobRepository , CompanyClient companyClient, ReviewClient reviewClient) {
+        this.companyClient = companyClient;
+        this.reviewClient = reviewClient;
         this.jobRepository = jobRepository;
     }
 
     @Override
-    public List<JobWithCompanyDto> findAll() {
-//        return jobs;
+//    @CircuitBreaker(name ="companyBreaker" , fallbackMethod = "companyBreakerFallBack")
+    @RateLimiter(name = "companyBreaker" , fallbackMethod = "companyBreakerFallBack")
+    public List<JobDto> findAll() {
         List<Job> jobs = jobRepository.findAll();
-        List<JobWithCompanyDto> jobWithCompanyDtos = new ArrayList<>();
 
-
-//        RestTemplate restTemplate = new RestTemplate();
-//        Company company = restTemplate.getForObject("http://localhost:8081/companies/1", Company.class );
-//        System.out.println("Company " + company.getName());
-//        System.out.println("Company " + company.getId());
-//        return jobRepository.findAll();
         return jobs.stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
-    private JobWithCompanyDto convertToDto(Job job) {
-
-            JobWithCompanyDto jobWithCompanyDto = new JobWithCompanyDto();
-            jobWithCompanyDto.setJob(job);
-
-            RestTemplate restTemplate = new RestTemplate();
-            Company company = restTemplate.getForObject("http://localhost:8081/companies/" + job.getCompanyId(), Company.class );
-            jobWithCompanyDto.setCompany(company);
-
-            return jobWithCompanyDto;
+    public List<String> companyBreakerFallBack(Exception e) {
+        List<String> str = new ArrayList<>();
+        str.add("dummy");
+        return str;
     }
+
+    private JobDto convertToDto(Job job) {
+    //this is using conventional RestTEmpalate
+//            Company company = restTemplate.getForObject("http://COMPANYMICROSERVICE:8081/companies/" + job.getCompanyId(), Company.class );
+//
+//
+//            //we did not use getFor method cuz it is usefull when you have a generic collection
+//           ResponseEntity<List<Review>> reviewResponse = restTemplate.exchange("http://REVIEWMICROSERVICE:8083/reviews?companyId=" + job.getCompanyId(), HttpMethod.GET,null,new ParameterizedTypeReference<List<Review>>() {});
+
+        Company company = companyClient.getCompany(job.getCompanyId());
+
+           //we have to get the body
+//           List<Review> reviews = reviewResponse.getBody();
+            List<Review> reviews = reviewClient.getReview(job.getCompanyId());
+            return JobMapper.mapToDto(job, company,reviews);
+
+    }
+
 
     @Override
     public void createJob(Job job) {
@@ -60,28 +85,18 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public Job findById(long id) {
-//        for (Job job : jobs) {
-//            if(job.getId() == id){
-//                return job;
-//            }
-//        }
-//
-//        return null;
-        return jobRepository.findById(id).orElse(null);
+    public JobDto findById(long id) {
+
+        Job job = jobRepository.findById(id).orElse(null);
+        if (job == null) {
+            return null;
+        }
+        return convertToDto(job);
     }
     //do the same thing using iterator<> class;
     @Override
     public boolean deleteJob(long id) {
-//       for (Job job : jobs) {
-//           if(job.getId() == id){
-//               jobs.remove(job);
-//               return true;
-//
-//           }
-//       }
-//
-//       return false;
+
         try {
             jobRepository.deleteById(id);
             return true;
@@ -92,21 +107,6 @@ public class JobServiceImpl implements JobService {
     }
 
     public boolean updateJob(long id , Job job) {
-
-//        for (Job job1 : jobs) {
-//            if(job1.getId() == id){
-//                job1.setName(job.getName());
-//                job1.setDescription(job.getDescription());
-//                job1.setLocation(job.getLocation());
-//                job1.setMaxSalary(job.getMaxSalary());
-//                job1.setMinSalary(job.getMinSalary());
-//                return true;
-//            }
-//        }
-//
-//
-//        return false;
-//    }
 
         Optional<Job> jobOptional = jobRepository.findById(id);
         if (jobOptional.isPresent()) {

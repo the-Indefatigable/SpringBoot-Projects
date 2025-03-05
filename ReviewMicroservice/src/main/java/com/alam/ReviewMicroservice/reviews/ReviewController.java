@@ -1,6 +1,7 @@
 package com.alam.ReviewMicroservice.reviews;
 
 
+import com.alam.ReviewMicroservice.reviews.messaging.ReviewMessageProducer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +13,10 @@ import java.util.List;
 public class ReviewController {
 
     private final ReviewService reviewService;
-    public ReviewController(ReviewService reviewService) {
+    private final ReviewMessageProducer reviewMessageProducer;
+    public ReviewController(ReviewService reviewService , ReviewMessageProducer reviewMessageProducer) {
         this.reviewService = reviewService;
+        this.reviewMessageProducer = reviewMessageProducer;
     }
 
     @GetMapping
@@ -25,6 +28,7 @@ public class ReviewController {
     public ResponseEntity<String> addReview(@RequestBody Review review , @RequestParam Long companyId) {
         boolean success = reviewService.addReview(companyId, review);
         if (success) {
+            reviewMessageProducer.sendMessage(review);
             return new ResponseEntity<>("Review added successfully", HttpStatus.CREATED);
         }
         return new ResponseEntity<>("Review not added", HttpStatus.NOT_FOUND);
@@ -57,6 +61,13 @@ public class ReviewController {
             return new ResponseEntity<>("Review deleted", HttpStatus.OK);
         }
         return new ResponseEntity<>("Review not Found", HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/averageRating")
+    public double getAverageRating(@RequestParam Long companyId) {
+        List<Review> reviewList = reviewService.getReviews(companyId);
+        return reviewList.stream().mapToDouble(Review::getRating).average().orElse(0.0);
+
     }
 
 }

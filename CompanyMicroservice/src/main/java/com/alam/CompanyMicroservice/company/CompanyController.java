@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/companies")
 public class CompanyController {
 
     CompanyService companyService;
@@ -17,20 +18,20 @@ public class CompanyController {
 
 
 
-    @GetMapping("/companies")
+    @GetMapping
     public List<Company> getCompanies()
     {
        return companyService.getCompanies();
     }
 
-    @PostMapping("/companies")
+    @PostMapping
     public String addCompany(@RequestBody Company company)
     {
         companyService.addCompany(company);
         return "Company added successfully";
     }
 
-   @GetMapping("companies/{id}")
+   @GetMapping("/{id}")
    public ResponseEntity<Company> getCompanyById(@PathVariable long id)
    {
        if (companyService.getCompanyById(id) != null){
@@ -40,7 +41,7 @@ public class CompanyController {
    }
 
 
-   @DeleteMapping("/delete/companies/{id}")
+   @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteCompanyById(@PathVariable long id)
    {
        boolean deleted = companyService.deleteCompanyById(id);
@@ -50,7 +51,7 @@ public class CompanyController {
        return new ResponseEntity<>("Company not found ",HttpStatus.NOT_FOUND);
    }
 
-   @PutMapping("/companies/{id}")
+   @PutMapping("/{id}")
     public ResponseEntity<String> updateCompanyById(@PathVariable long id, @RequestBody Company newCompany)
    {
        boolean updated = companyService.updateCompanyById(id , newCompany);

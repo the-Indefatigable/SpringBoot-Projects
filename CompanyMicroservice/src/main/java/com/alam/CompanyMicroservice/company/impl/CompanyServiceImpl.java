@@ -3,6 +3,8 @@ package com.alam.CompanyMicroservice.company.impl;
 import com.alam.CompanyMicroservice.company.Company;
 import com.alam.CompanyMicroservice.company.CompanyRepository;
 import com.alam.CompanyMicroservice.company.CompanyService;
+import com.alam.CompanyMicroservice.company.clients.ReviewClient;
+import com.alam.CompanyMicroservice.company.dto.ReviewMessage;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +15,13 @@ import java.util.Optional;
 public class CompanyServiceImpl implements CompanyService {
 
     private final CompanyRepository companyRepository;
+    private final ReviewClient reviewClient;
 
 
-    public CompanyServiceImpl(CompanyRepository companyRepository){
+    public CompanyServiceImpl(CompanyRepository companyRepository, ReviewClient reviewClient){
         this.companyRepository = companyRepository;
 
+        this.reviewClient = reviewClient;
     }
     @Override
     public List <Company> getCompanies() {
@@ -55,5 +59,19 @@ public class CompanyServiceImpl implements CompanyService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void updateCompanyRating(ReviewMessage reviewMessage) {
+        Company company = getCompanyById(reviewMessage.getCompanyId());
+        if (company == null) {
+            System.out.println("Company not found");
+            return;
+        }
+
+        double averageRating = reviewClient.getAverageRating(reviewMessage.getCompanyId());
+        company.setRating(averageRating);
+        companyRepository.save(company);
+
     }
 }

@@ -12,6 +12,16 @@ public class Company {
     private String name;
     private String description;
 
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
+
+    private Double rating;
+
 
 //    @OneToMany(mappedBy = "company" ,cascade = CascadeType.ALL, orphanRemoval = true)
     //above one can work if you dont want to write the whole logic for deletion

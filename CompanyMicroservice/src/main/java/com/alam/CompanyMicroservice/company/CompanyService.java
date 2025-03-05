@@ -1,5 +1,7 @@
 package com.alam.CompanyMicroservice.company;
 
+import com.alam.CompanyMicroservice.company.dto.ReviewMessage;
+
 import java.util.List;
 
 public interface CompanyService {
@@ -12,4 +14,6 @@ public interface CompanyService {
     boolean deleteCompanyById(long id);
 
     boolean updateCompanyById(long id, Company newCompany);
+
+    public void updateCompanyRating(ReviewMessage reviewMessage);
 }
